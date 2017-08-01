@@ -11,10 +11,8 @@ RUN apt-get update -y \
 libbind-dev \
 libpcre3-dev \
 libssl-dev \
-zlib1g-dev \
 libcurl4-openssl-dev \
 build-essential \
-linux-headers-generic \
 wget \
 bzip2 \
 libnet-ldap-perl \
@@ -26,25 +24,36 @@ tcpdump \
 
 RUN mkdir /build && wget $url -O /build/${url##*/} && tar -xf /build/${url##*/} -C /build/
 
-RUN /build/PROJECTS/configure \
+WORKDIR /build/PROJECTS
+
+RUN ./configure \
+--prefix=/usr \
+--bindir=/usr/bin \
+--etcdir=/etc \
+--sbindir=/usr/sbin \
+--libdir=/usr/lib \
+--libarchdir=/usr/lib64 \
+--libexecdir=/usr/libexec \
+--docdir=/usr/share/mavis \
 --with-epoll \
 --with-lwres \
 --with-pcre \
 --with-ssl \
---with-zlib \
 --with-curl \
 mavis spawnd tac_plus
 
-RUN make -C /build/PROJECTS && make -C /build/PROJECTS install
+RUN make && make install
+
+RUN ln -s /usr/lib/mavis /usr/local/lib/mavis
+
+WORKDIR /
 
 RUN apt-get remove -y \
 libbind-dev \
 libpcre3-dev \
 libssl-dev \
-zlib1g-dev \
 libcurl4-openssl-dev \
 build-essential \
-linux-headers-generic \
 wget \
 bzip2 \
 && apt-get clean \

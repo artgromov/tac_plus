@@ -14,7 +14,11 @@ docker pull artgromov/tac_plus
 ```
 ### How to run
 ```
-docker run -d -p 49:49 -v <path_to_tac_plus.conf>:/usr/local/etc/tac_plus.conf tac_plus
+docker run -d -p 49:49 --env=conf=<url_to.conf> artgromov/tac_plus
+```
+or
+```
+docker run -d -p 49:49 -v <path_to.conf>:/usr/local/etc/tac_plus.conf artgromov/tac_plus
 ```
 
 # Reference links and project information

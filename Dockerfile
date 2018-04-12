@@ -1,8 +1,8 @@
 FROM ubuntu
 
-LABEL maintainer="Artem Gromov <artyomgromov@gmail.com>" version="0.5.1"
+LABEL maintainer="Artem Gromov <artyomgromov@gmail.com>" version="0.5.2"
 
-ARG url=http://www.pro-bono-publico.de/projects/src/DEVEL.201710201114.tar.bz2
+ARG url=http://www.pro-bono-publico.de/projects/src/DEVEL.201712190728.tar.bz2
 
 ENV conf=/usr/local/etc/tac_plus.conf
 
